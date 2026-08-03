@@ -92,9 +92,6 @@ export default function MusicSection() {
                 />
               )}
             </div>
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-muted">
-              ⊕ 替换歌单：打开 data/music.ts 改 neteaseId
-            </p>
           </div>
         </div>
       </Container>
