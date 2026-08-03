@@ -1,14 +1,27 @@
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import {
   Rajdhani,
   Orbitron,
   Inter,
   JetBrains_Mono,
 } from "next/font/google";
-import CursorFollower from "@/components/effects/CursorFollower";
-import FloatingParticles from "@/components/effects/FloatingParticles";
-import LiquidEther from "@/components/effects/LiquidEther";
 import "./globals.css";
+
+// 重型客户端特效 → 全部 lazy + ssr:false，避免阻塞首屏渲染与 layout bundle
+// LiquidEther 是 Navier-Stokes 流体（WebGL），最重；其它为 DOM 端辅助
+const CursorFollower = dynamic(
+  () => import("@/components/effects/CursorFollower"),
+  { ssr: false },
+);
+const FloatingParticles = dynamic(
+  () => import("@/components/effects/FloatingParticles"),
+  { ssr: false, loading: () => null },
+);
+const LiquidEther = dynamic(
+  () => import("@/components/effects/LiquidEther"),
+  { ssr: false, loading: () => null },
+);
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
