@@ -119,8 +119,19 @@ EdgeOne Pages 控制台会显示新的 build 进度。
 → 检查路由:本站只有 `/`、`/main`、`/works`,其它路径会走 `_not-found`。
 
 ### ❌ AI 聊天没响应
-→ 检查环境变量是否全部填了,**特别是 `AI_API_KEY`**
-→ EdgeOne Pages 控制台 → 函数日志 查看报错
+→ **第一步:先看报错是什么。** 聊天面板会直接显示错误文字,三种典型情况:
+
+| 报错文字 | 原因 | 解决 |
+|---|---|---|
+| `HTTP 500: {"error":"AI_API_KEY 未配置..."}` | EdgeOne 控制台环境变量没填/没生效 | 项目设置 → 环境变量补齐 5 个 → **重新部署**(改环境变量必须触发一次新部署才生效) |
+| `HTTP 500: {"error":"401/403 ..."}` | API key 无效或胜算云余额不足 | 本地 `curl` 验证 key,或换 key |
+| 面板一直转圈、无报错也无回复 | SSE 流被 CDN 缓冲,或函数运行时报错 | EdgeOne 控制台 → 函数日志 查看报错 |
+
+→ 已做的代码兼容(2026-09-19):
+- 移除了 `route.ts` 里的 `runtime = "edge"` 声明 —— EdgeOne 函数环境与 Vercel Edge Runtime 实现不同,显式声明可能导致函数执行异常
+- 移除了 SSE 响应里的 `Connection: keep-alive` 头 —— hop-by-hop 头在 HTTP/2 下非法,过 CDN 可能被拒绝
+
+→ 仍不行时,浏览器 DevTools → Network → 点 `/api/chat` 请求,把 **状态码 + Response 内容** 贴出来进一步定位。
 
 ### ❌ 图片加载慢 / 加载不出来
 → `next/image` 的 remotePatterns 配置允许所有 `https://**`,理论上都过。
