@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Square, RotateCcw } from "lucide-react";
 import { useChat } from "@/components/chat/useChat";
+import ThinkingIndicator from "./ThinkingIndicator";
 import { cn } from "@/lib/utils";
 
 export default function ChatPanel({ onClose }: { onClose: () => void }) {
@@ -98,7 +99,11 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
                   : "bg-line/30 text-text px-3 py-2",
               )}
             >
-              {m.content || (m.role === "assistant" && streaming ? "▍" : "")}
+              {m.role === "assistant" && !m.content && streaming ? (
+                <ThinkingIndicator />
+              ) : (
+                m.content || (m.role === "assistant" && streaming ? "▍" : "")
+              )}
             </motion.div>
           ))}
         </AnimatePresence>
