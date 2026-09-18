@@ -7,6 +7,7 @@ import ShowreelSection from "@/components/sections/ShowreelSection";
 import PracticeSection from "@/components/sections/PracticeSection";
 import MusicSection from "@/components/sections/MusicSection";
 import ChatFAB from "@/components/chat/ChatFAB";
+import ProjectDetailModal from "@/components/project-detail/ProjectDetailModal";
 
 export default function MainPage() {
   return (
@@ -48,6 +49,8 @@ export default function MainPage() {
 
       {/* 全局浮动 AI 对话 */}
       <ChatFAB />
+      {/* 项目详情 Modal（监听 project:open 事件 · 任何项目卡都触发） */}
+      <ProjectDetailModal />
     </main>
   );
 }

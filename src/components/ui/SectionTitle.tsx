@@ -31,7 +31,7 @@ export function SectionTitle({
       </h2>
 
       {subtitle && (
-        <p className="col-span-12 md:col-span-3 text-lead text-text-3 md:text-right mt-4 md:mt-0 font-heading">
+        <p className="col-span-12 md:col-span-3 text-lead text-text-3 md:text-right mt-4 md:mt-0 font-heading whitespace-nowrap">
           {subtitle}
         </p>
       )}

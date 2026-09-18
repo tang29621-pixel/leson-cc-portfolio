@@ -1,12 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
-import {
-  Rajdhani,
-  Orbitron,
-  Inter,
-  JetBrains_Mono,
-} from "next/font/google";
 import "./globals.css";
+
+// @fontsource：本地托管字体（避免 next/font/google 在 build 时联网 Google Fonts）
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource/jetbrains-mono/700.css";
+import "@fontsource/orbitron/500.css";
+import "@fontsource/orbitron/700.css";
+import "@fontsource/orbitron/900.css";
+import "@fontsource/rajdhani/400.css";
+import "@fontsource/rajdhani/500.css";
+import "@fontsource/rajdhani/600.css";
+import "@fontsource/rajdhani/700.css";
 
 // 重型客户端特效 → 全部 lazy + ssr:false，避免阻塞首屏渲染与 layout bundle
 // LiquidEther 是 Navier-Stokes 流体（WebGL），最重；其它为 DOM 端辅助
@@ -22,33 +32,6 @@ const LiquidEther = dynamic(
   () => import("@/components/effects/LiquidEther"),
   { ssr: false, loading: () => null },
 );
-
-const rajdhani = Rajdhani({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-rajdhani",
-  display: "swap",
-});
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["500", "700", "900"],
-  variable: "--font-orbitron",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-jetbrains",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -77,10 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="zh-CN"
-      className={`${rajdhani.variable} ${orbitron.variable} ${inter.variable} ${jetbrains.variable} dark`}
-    >
+    <html lang="zh-CN" className="dark">
       <body className="min-h-screen bg-bg text-text antialiased">
         {children}
         {/* 全局 UI 特效：粉点光标跟随 + 背景星点 twinkle + 流体背景 LiquidEther（cyber 粉主题） */}

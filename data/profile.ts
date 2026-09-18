@@ -102,6 +102,12 @@ export const timeline: TimelineItem[] = [
     detail: "持续探索视觉设计、智能产品、交互艺术、AIGC 影像与实时三维表达。",
   },
   {
+    year: "2026至今",
+    kind: "work",
+    title: "设计实习生｜飞书深诺",
+    detail: "参与 Baseball Clash 平面投放物料、傲风电竞椅广告口播视频、DinoAI AI 广告口播视频等多个项目的视觉与视频制作。",
+  },
+  {
     year: "2026",
     kind: "work",
     title: "设计实习生｜Cherry Studio",

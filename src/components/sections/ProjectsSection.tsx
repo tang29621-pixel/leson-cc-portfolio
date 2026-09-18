@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { projects } from "@data/projects";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
+import { openProject } from "@/components/project-detail/openProject";
 
 export default function ProjectsSection() {
   const featured = projects.filter((p) => p.featured);
@@ -35,7 +36,17 @@ export default function ProjectsSection() {
             <motion.article
               key={p.id}
               variants={fadeUp}
-              className={`group relative overflow-hidden border border-line bg-surface1 ${p.span} hover:border-accent hover:shadow-neon-primary transition-all duration-normal`}
+              role="button"
+              tabIndex={0}
+              onClick={() => openProject(p.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  openProject(p.id);
+                }
+              }}
+              aria-label={`查看 ${p.title} 项目详情`}
+              className={`group relative overflow-hidden border border-line bg-surface1 ${p.span} cursor-pointer hover:border-accent hover:shadow-neon-primary focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-all duration-normal`}
             >
               {/* 封面图（coverHue 作为加载占位色） */}
               <Image

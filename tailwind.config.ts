@@ -43,13 +43,14 @@ const config: Config = {
         info: "#59D7FF",
       },
       fontFamily: {
-        display: ["var(--font-rajdhani)", '"Rajdhani"', '"Orbitron"', '"Arial Narrow"', "sans-serif"],
-        heading: ["var(--font-rajdhani)", '"Rajdhani"', '"Inter"', '"PingFang SC"', '"Microsoft YaHei"', "sans-serif"],
-        body: ["var(--font-inter)", '"Inter"', '"PingFang SC"', '"Microsoft YaHei"', "sans-serif"],
-        mono: ["var(--font-jetbrains)", '"JetBrains Mono"', '"SFMono-Regular"', "ui-monospace", "monospace"],
+        // @fontsource 自动注入的 CSS font-family（与 package 同名）
+        display: ['"Rajdhani"', '"Orbitron"', '"Arial Narrow"', "sans-serif"],
+        heading: ['"Rajdhani"', '"Inter"', '"PingFang SC"', '"Microsoft YaHei"', "sans-serif"],
+        body: ['"Inter"', '"PingFang SC"', '"Microsoft YaHei"', "sans-serif"],
+        mono: ['"JetBrains Mono"', '"SFMono-Regular"', "ui-monospace", "monospace"],
         // 兼容老代码：font-serif 现在指向 Rajdhani（窄体）
-        serif: ["var(--font-rajdhani)", '"Rajdhani"', "ui-serif", "Georgia", "serif"],
-        sans: ["var(--font-inter)", '"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ['"Rajdhani"', "ui-serif", "Georgia", "serif"],
+        sans: ['"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],
       },
       fontSize: {
         display: ["clamp(64px, 10vw, 132px)", { lineHeight: "0.9", letterSpacing: "-0.04em" }],

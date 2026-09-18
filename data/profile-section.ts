@@ -35,6 +35,16 @@ export const profileEducation: ProfileEducation[] = [
 
 export const profileExperience: ProfileExperience[] = [
   {
+    period: "2026 — NOW",
+    company: "飞书深诺",
+    role: "设计实习生",
+    scope: [
+      "Baseball Clash 移动游戏平面投放物料",
+      "傲风电竞椅 广告口播视频制作",
+      "DinoAI AI 广告口播视频制作",
+    ],
+  },
+  {
     period: "2026",
     company: "Cherry Studio",
     role: "设计实习生",

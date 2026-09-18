@@ -12,7 +12,7 @@
 //   v1: https://www.bilibili.com/video/BV1qH7p6MEMK → REBUILD THE CITY (p4)
 //   v2: https://www.bilibili.com/video/BV1qiMD6FEEf → Hydra Flow Station (p7)
 //   v3: https://www.bilibili.com/video/BV1fCMo62Ewn → Stellar Pulse / 星际脉冲 (p2)
-// v4：1 个未公开视频占位，等用户发布后补 bvid
+// v4：占位已删除（2026-09-18）
 
 export type VideoSource = "bilibili" | "self" | "placeholder";
 
@@ -65,9 +65,14 @@ export const videos: Video[] = [
     desc: "围绕速度与光线的实时视觉装置完整视频版",
   },
   {
-    id: "v4",
-    title: "Coming Soon",
-    source: "placeholder",
-    // TODO: 用户发布后补 bvid / projectId
+    id: "v5",
+    title: "Cherry Studio V2.0 正式发布",
+    subtitle: "智能模型集合软件 · V2.0 发布",
+    year: "2026",
+    type: "UI Motion / Product Film",
+    projectId: "p1",
+    source: "bilibili",
+    bvid: "BV1tHMC64EME",
+    desc: "Cherry Studio V2.0 官方发布视频",
   },
 ];

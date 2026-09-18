@@ -1,0 +1,23 @@
+# Vercel 部署时忽略的文件（不传部署包）
+# Vercel CLI 单次部署上限 100MB，所以排除超大文件
+
+# === p7 备用大图（暂挂等压缩，之前已转 webp 备用版） ===
+public/images/projects/p7/竖版.png
+
+# === p9 IP 设计原始 PDF 备份（已有压缩版 ip-design.pdf 2.18MB） ===
+public/documents/projects/p9/ip-design.original.pdf
+
+# === 开发 / 缓存 ===
+node_modules
+.next
+.DS_Store
+*.bak
+*.bak.mp4
+*.bak.png
+*.bak.pdf
+
+# === 个人本地 ===
+个人照片
+.env.local
+.env*.local
+*.tsbuildinfo

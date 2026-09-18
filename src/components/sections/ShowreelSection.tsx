@@ -9,6 +9,7 @@
  *   - 选中态 : 缩略图 neon 边框高亮
  *
  * 数据：videos 数组来自 @data/videos
+ * v4 占位已删除（2026-09-18）
  *   v1 = P4 REBUILD THE CITY（B 站 BV1qH7p6MEMK）
  *   v2 = P7 HYDRA FLOW STATION（B 站 BV1qiMD6FEEf）
  *   v3-v4 = Coming Soon 占位
@@ -220,10 +221,6 @@ export default function ShowreelSection() {
             })}
           </motion.ul>
         </motion.div>
-
-        <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-muted">
-          ⊕ 数据：data/videos.ts · v1-v2 为 B 站嵌入，v3-v4 待发布
-        </p>
       </Container>
     </section>
   );

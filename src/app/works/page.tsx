@@ -13,6 +13,8 @@ import {
   type ProjectCategory,
 } from "@data/projects";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
+import { openProject } from "@/components/project-detail/openProject";
+import ProjectDetailModal from "@/components/project-detail/ProjectDetailModal";
 
 type Filter = "all" | ProjectCategory;
 
@@ -133,12 +135,25 @@ export default function WorksPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="group glass-panel hover:neon-border transition-all duration-normal"
+                role="button"
+                tabIndex={0}
+                onClick={() => openProject(p.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openProject(p.id);
+                  }
+                }}
+                aria-label={`查看 ${p.title} 项目详情`}
+                className="group glass-panel hover:neon-border transition-all duration-normal cursor-pointer focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
-                {/* 封面图 */}
+                {/* 封面图（按 coverAspect 字段调整比例，默认 16/9） */}
                 <div
-                  className="relative aspect-[16/9] w-full overflow-hidden"
-                  style={{ backgroundColor: p.coverHue }}
+                  className="relative w-full overflow-hidden"
+                  style={{
+                    aspectRatio: p.coverAspect || "16/9",
+                    backgroundColor: p.coverHue,
+                  }}
                 >
                   <Image
                     src={p.cover}
@@ -215,6 +230,9 @@ export default function WorksPage() {
           </p>
         )}
       </Container>
+
+      {/* 项目详情 Modal（监听 project:open 事件） */}
+      <ProjectDetailModal />
     </main>
   );
 }

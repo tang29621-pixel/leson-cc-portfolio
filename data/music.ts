@@ -21,6 +21,14 @@ export type Track = {
   title: string;
   artist: string;
   year?: string;
+  /**
+   * 网易云单曲 ID · 用于站内 iframe 嵌入播放
+   * - 有值 → 站内 iframe 直接播放（点击行为：audio 在站内）
+   * - 无值 → 点击跳网易云该曲搜索页（外部播放）
+   *
+   * 填法：在 music.163.com 搜「歌名 艺人」→ 进入单曲页 → URL `?id=` 后那串数字
+   */
+  neteaseId?: string;
 };
 
 // 网易云媒体 ID + 嵌入类型
@@ -37,13 +45,13 @@ export const playlist = {
 };
 
 export const tracks: Track[] = [
-  { title: "Nangilima",            artist: "Smith & Thell" },
-  { title: "Today My Life Begins", artist: "Bruno Mars" },
-  { title: "In Between The Lines", artist: "Tyrone Wells" },
-  { title: "10000 Hours",          artist: "Thomas Vee" },
-  { title: "DD backseat",          artist: "Top Barry, Rapeter" },
-  { title: "DNA (More Than A Game)", artist: "Andrea Bocelli" },
-  { title: "Pasta",                artist: "New Rules" },
-  { title: "10,000 Hours",         artist: "Thomas Vee" }, // 同 10000 Hours：API 确认 ID 1400175732 是 Thomas Vee 版
-  { title: "阿司匹林",              artist: "王以太" },
+  { title: "Nangilima",            artist: "Smith & Thell",       neteaseId: "1813007393" }, // ✅ 已有
+  { title: "Today My Life Begins", artist: "Bruno Mars" },         // TODO: 填入 neteaseId 即可站内播放
+  { title: "In Between The Lines", artist: "Tyrone Wells" },       // TODO
+  { title: "10000 Hours",          artist: "Thomas Vee" },         // TODO
+  { title: "DD backseat",          artist: "Top Barry, Rapeter" },// TODO
+  { title: "DNA (More Than A Game)", artist: "Andrea Bocelli" },   // TODO
+  { title: "Pasta",                artist: "New Rules" },          // TODO
+  { title: "10,000 Hours",         artist: "Thomas Vee" },         // TODO（同上首）
+  { title: "阿司匹林",              artist: "王以太" },              // TODO
 ];
