@@ -42,4 +42,7 @@ next-env.d.ts
 # 个人照片源（不进仓库；如果要提交移到 public/images/ 下）
 个人照片/
 
+# 本地工作记忆（WorkBuddy / Claude Code 排错记录，不进仓库）
+.workbuddy/
+
 .vercel

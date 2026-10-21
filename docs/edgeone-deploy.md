@@ -3,16 +3,26 @@
 > 国内访问专用镜像,与 Vercel 部署**完全独立、互不影响**。
 > 源码 **0 改动**,只在腾讯云控制台点几下。
 
+## 当前线上状态（2026-10-21）
+
+| 项目 | 值 |
+|---|---|
+| 正式域名 | **https://lesoncici.cn**（已备案） |
+| 加速区域 | 全球可用区（含中国大陆） |
+| 备案 | ✅ 已通过（腾讯云备案，`lesoncici.cn`） |
+| 海外线路 | Vercel `leson-cc-portfolio.vercel.app`（同仓库自动部署） |
+| AI 接口 | 胜算云 router，`/api/chat` 走 Node 运行时 |
+
 ---
 
 ## 为什么选 EdgeOne Pages
 
 - ✅ Next.js 原生支持,直接识别框架
-- ✅ `/api/chat` 用了 `runtime: "edge"`,EdgeOne Pages 本身就跑在 edge 函数上,延迟最低
 - ✅ 免费额度对个人作品站绰绰有余
-- ✅ **免备案**(境外节点)
-- ✅ 国内访问速度比 Vercel 快很多
+- ✅ 国内访问速度比 Vercel 快很多（大陆节点）
 - ✅ 推代码自动部署(GitHub 集成)
+- ⚠️ **需要备案**:本项目加速区域是「全球可用区（含中国大陆）」,自定义域名**必须完成工信部备案**。
+  只有「全球可用区（不含中国大陆）」才免备案,但该区域会**主动屏蔽大陆 IP（返回 401）**,对国内镜像场景没有意义。
 
 ---
 
@@ -61,18 +71,37 @@ AI_PROVIDER     = qwen
 AI_API_KEY      = <你的胜算云 API key>
 AI_BASE_URL     = <胜算云 router URL>
 AI_MODEL        = <你的模型名,如 deepseek-chat>
-NEXT_PUBLIC_SITE_URL = https://<待分配的 edgeone.app 域名>
+NEXT_PUBLIC_SITE_URL = https://lesoncici.cn
 ```
 
-> `NEXT_PUBLIC_SITE_URL` 可以先空着,部署完拿到域名后再回来填,或者填 Vercel 那个域名也行,只影响 SEO/og:url,不影响功能。
+> `NEXT_PUBLIC_SITE_URL` 只影响 SEO / og:url / metadataBase,不影响功能。
+> 改完环境变量**必须触发一次新部署**才会生效。
 
 ### 5. 部署
 
-点 **"开始部署"** → 等待 2~4 分钟 → 控制台会出现 `https://<xxx>.edgeone.app`
+点 **"开始部署"** → 等待 2~4 分钟 → 控制台的项目域名形如 `https://<xxx>.edgeone.cool`
 
-### 6. 回到环境变量
+> ⚠️ 含中国大陆区域的项目,**项目域名/部署域名必须用带 `eo_token` 的预览链接访问,有效期仅 3 小时**（过期返回 401）。
+> 要长期公开访问,必须绑定自定义域名 —— 见下一步。
 
-把 `NEXT_PUBLIC_SITE_URL` 改成刚拿到的 `https://<xxx>.edgeone.app` → 触发一次重新部署。
+### 6. 绑定自定义域名 `lesoncici.cn`（备案通过后）★ 关键
+
+1. EdgeOne Pages 控制台 → 项目 → **域名管理 / 自定义域名** → 添加 `lesoncici.cn`
+   （如果提示"域名未备案",说明备案还没生效,回到腾讯云备案控制台确认下证）
+2. 平台会给出一条 **CNAME 记录值**,复制下来
+3. 腾讯云 **DNSPod 控制台**（console.cloud.tencent.com/cns）→ `lesoncici.cn` → 添加/修改记录:
+
+   | 字段 | 值 |
+   |---|---|
+   | 主机记录 | `@` |
+   | 记录类型 | `CNAME` |
+   | 记录值 | 上一步 EdgeOne 给的 CNAME |
+   | TTL | 600 |
+
+   建议再加一条主机记录 `www` 的同值记录,让 `www.lesoncici.cn` 也能访问。
+4. 等 5~30 分钟解析生效 → EdgeOne 自动签发 HTTPS 证书 → `https://lesoncici.cn` 可访问
+
+> 若 DNSPod 提示"@ 不允许 CNAME",改用 EdgeOne 控制台提供的替代方案（通常是让你用 CNAME 接入或改用 A 记录指向它给的 IP）。
 
 ---
 
@@ -80,7 +109,7 @@ NEXT_PUBLIC_SITE_URL = https://<待分配的 edgeone.app 域名>
 
 部署完成后,按顺序检查:
 
-- [ ] 打开 `https://<xxx>.edgeone.app`,首屏和 Vercel 一模一样
+- [ ] 打开 `https://lesoncici.cn`,首屏和 Vercel 一模一样
 - [ ] 滚动动效 (LiquidEther / FloatingParticles / CursorFollower) 正常
 - [ ] 切换 Hero 卡片 / Works 列表 / 项目详情 Modal 正常
 - [ ] 点 **AI 聊天按钮**,发条消息,**确认有流式回复** ← 这步最重要,验 API 通

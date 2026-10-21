@@ -154,6 +154,10 @@ AI_MODEL=deepseek-chat      # 可选
 
 ## 部署
 
+> 线上双线（同一 GitHub 仓库 `main` 分支，推一次代码两边同时更新）：
+> - 国内（已备案）：**https://lesoncici.cn** — 腾讯云 EdgeOne Pages，详见 [`docs/edgeone-deploy.md`](docs/edgeone-deploy.md)
+> - 海外：`leson-cc-portfolio.vercel.app` — Vercel
+
 ### Vercel（推荐）
 
 1. 推到 GitHub
